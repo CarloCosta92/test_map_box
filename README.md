@@ -1,16 +1,36 @@
-# React + Vite
+# 🗺️ React Address Autofill con Mapbox
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Questo progetto mostra come integrare **Mapbox Address Autofill** in un'app React per ottenere in modo semplice e gratuito:
+- autocompletamento dell’indirizzo mentre l’utente digita;
+- recupero automatico di tutti i dettagli (via, città, CAP, regione, paese);
+- coordinate geografiche (latitudine e longitudine);
+- compilazione automatica dei campi del form.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Tecnologie principali
 
-## React Compiler
+- **React 18+**
+- **@mapbox/search-js-react** → SDK ufficiale di Mapbox per l’autocompletamento indirizzi  
+- **Vite / Create React App** → ambiente di sviluppo (compatibile con entrambi)
+- **Bootstrap o Tailwind** (facoltativo) per lo stile
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 🧩 Funzionalità
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+✅ Campo input collegato a Mapbox Address Autofill  
+✅ Suggerimenti dinamici mentre l’utente scrive  
+✅ Al click su un suggerimento → compilazione automatica dei campi indirizzo  
+✅ Ritorno dei dati completi al parent component  
+✅ Coordinate GPS incluse per eventuale geolocalizzazione su mappa  
+
+---
+
+## ⚙️ Setup
+
+### 1️⃣ Installazione
+```bash
+npm install
+npm install @mapbox/search-js-react
+
