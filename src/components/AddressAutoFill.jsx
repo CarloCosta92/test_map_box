@@ -1,31 +1,44 @@
 import { useState } from "react";
 import { AddressAutofill } from "@mapbox/search-js-react";
-import { GeoAltFill } from "react-bootstrap-icons"; // icona mappa
+import { GeoAltFill } from "react-bootstrap-icons";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const AddressAutofillInput = ({ onSelect, accessToken, label = "Indirizzo" }) => {
     const [isFocused, setIsFocused] = useState(false);
 
     const handleRetrieve = (e) => {
-        const result = e.features[0];
-        if (!result) return;
+        const feature = e.features?.[0];
+        if (!feature) return;
 
-        const context = result.context || [];
-        const props = result.properties || {};
+        const props = feature.properties || {};
+        const context = feature.context || [];
+
+
+        const getContext = (idPart) =>
+            context.find((c) => c.id.includes(idPart))?.text || "";
+
 
         const data = {
-            fullAddress: result.place_name,
-            street: props.address_line1 || "",
-            city: props.place || context.find(c => c.id.includes("place"))?.text || "",
-            region: props.region || context.find(c => c.id.includes("region"))?.text || "",
-            postcode: props.postcode || context.find(c => c.id.includes("postcode"))?.text || "",
-            country: props.country || context.find(c => c.id.includes("country"))?.text || "",
-            latitude: result.geometry.coordinates[1],
-            longitude: result.geometry.coordinates[0],
+            full_address: props.full_address || feature.place_name || "",
+            address: props.street || feature.text || "",
+            street_number: props.address_number || props.address || "",
+            postal_code: props.postcode || getContext("postcode"),
+            hamlet: props.locality || getContext("locality"),
+            city: props.place || props.address_level2 || getContext("place"),
+            province: props.region || props.address_level1 || getContext("region"),
+            nation: props.country || getContext("country"),
+            lng: feature.geometry?.coordinates?.[0] || null,
+            lat: feature.geometry?.coordinates?.[1] || null,
+            alt: null,
+            meta_source: feature,
         };
 
-        onSelect?.(data);
+        console.log("Dati Mapbox:", feature);
+        console.log("Dati per il database:", data);
+
+        onSelect(data);
     };
+
 
     return (
         <div className="mb-3">
@@ -33,7 +46,7 @@ const AddressAutofillInput = ({ onSelect, accessToken, label = "Indirizzo" }) =>
             <AddressAutofill
                 accessToken={accessToken}
                 onRetrieve={handleRetrieve}
-                options={{ country: ["it"] }}
+                options={{ country: "it" }}
             >
                 <div
                     className={`input-group shadow-sm rounded-3 border ${isFocused ? "border-primary" : "border-light"

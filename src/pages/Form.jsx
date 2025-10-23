@@ -1,6 +1,7 @@
 import { useState } from "react";
 import AddressAutofillInput from "../components/AddressAutoFill";
 
+
 const MyForm = () => {
     const [form, setForm] = useState({
         fullAddress: "",
@@ -14,7 +15,16 @@ const MyForm = () => {
     });
 
     const handleAddressSelect = (data) => {
-        setForm(data);
+        setForm({
+            fullAddress: data.full_address,
+            street: `${data.address} ${data.street_number}`,
+            city: data.city,
+            region: data.province,
+            postcode: data.postal_code,
+            country: data.nation,
+            latitude: data.lat,
+            longitude: data.lng,
+        });
     };
 
     const handleChange = (e) => {
@@ -27,12 +37,10 @@ const MyForm = () => {
             <div className="card shadow-sm p-4">
                 <h4 className="mb-3 text-primary">Indirizzo</h4>
 
-
                 <AddressAutofillInput
                     accessToken={import.meta.env.VITE_MAPBOX_TOKEN}
                     onSelect={handleAddressSelect}
                 />
-
 
                 <div className="row mt-3">
                     <div className="col-md-6 mb-3">
@@ -90,7 +98,6 @@ const MyForm = () => {
                         />
                     </div>
                 </div>
-
             </div>
         </div>
     );
