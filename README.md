@@ -12,8 +12,8 @@ Questo progetto mostra come integrare **Mapbox Address Autofill** in un'app Reac
 
 - **React 18+**
 - **@mapbox/search-js-react** → SDK ufficiale di Mapbox per l’autocompletamento indirizzi  
-- **Vite / Create React App** → ambiente di sviluppo (compatibile con entrambi)
-- **Bootstrap o Tailwind** (facoltativo) per lo stile
+- **Vite** → ambiente di sviluppo (compatibile con entrambi)
+- **Bootstrap** per lo stile
 
 ---
 
