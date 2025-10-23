@@ -23,65 +23,77 @@ const MyForm = () => {
     };
 
     return (
-        <div className="container py-4">
-            <h4>Indirizzo</h4>
-            <AddressAutofillInput
-                accessToken={import.meta.env.VITE_MAPBOX_TOKEN}
-                onSelect={handleAddressSelect}
-            />
+        <div className="container py-5">
+            <div className="card shadow-sm p-4">
+                <h4 className="mb-3 text-primary">Indirizzo</h4>
 
-            <div className="mt-3">
-                <label>Via e numero</label>
-                <input
-                    name="street"
-                    value={form.street}
-                    onChange={handleChange}
-                    className="form-control"
+
+                <AddressAutofillInput
+                    accessToken={import.meta.env.VITE_MAPBOX_TOKEN}
+                    onSelect={handleAddressSelect}
                 />
 
-                <label className="mt-2">Città</label>
-                <input
-                    name="city"
-                    value={form.city}
-                    onChange={handleChange}
-                    className="form-control"
-                />
 
-                <label className="mt-2">Regione</label>
-                <input
-                    name="region"
-                    value={form.region}
-                    onChange={handleChange}
-                    className="form-control"
-                />
+                <div className="row mt-3">
+                    <div className="col-md-6 mb-3">
+                        <label className="form-label">Via e numero</label>
+                        <input
+                            name="street"
+                            value={form.street}
+                            onChange={handleChange}
+                            className="form-control"
+                        />
+                    </div>
+                    <div className="col-md-6 mb-3">
+                        <label className="form-label">Città</label>
+                        <input
+                            name="city"
+                            value={form.city}
+                            onChange={handleChange}
+                            className="form-control"
+                        />
+                    </div>
+                    <div className="col-md-6 mb-3">
+                        <label className="form-label">Regione</label>
+                        <input
+                            name="region"
+                            value={form.region}
+                            onChange={handleChange}
+                            className="form-control"
+                        />
+                    </div>
+                    <div className="col-md-6 mb-3">
+                        <label className="form-label">CAP</label>
+                        <input
+                            name="postcode"
+                            value={form.postcode}
+                            onChange={handleChange}
+                            className="form-control"
+                        />
+                    </div>
+                    <div className="col-md-6 mb-3">
+                        <label className="form-label">Latitudine</label>
+                        <input
+                            name="latitude"
+                            value={form.latitude}
+                            onChange={handleChange}
+                            className="form-control"
+                        />
+                    </div>
+                    <div className="col-md-6 mb-3">
+                        <label className="form-label">Longitudine</label>
+                        <input
+                            name="longitude"
+                            value={form.longitude}
+                            onChange={handleChange}
+                            className="form-control"
+                        />
+                    </div>
+                </div>
 
-                <label className="mt-2">CAP</label>
-                <input
-                    name="postcode"
-                    value={form.postcode}
-                    onChange={handleChange}
-                    className="form-control"
-                />
-
-                <label className="mt-2">Latitudine</label>
-                <input
-                    name="latitude"
-                    value={form.latitude}
-                    onChange={handleChange}
-                    className="form-control"
-                />
-
-                <label className="mt-2">Longitudine</label>
-                <input
-                    name="longitude"
-                    value={form.longitude}
-                    onChange={handleChange}
-                    className="form-control"
-                />
             </div>
-
-
         </div>
     );
-}
+};
+
 export default MyForm;

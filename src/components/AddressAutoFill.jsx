@@ -1,6 +1,11 @@
+import { useState } from "react";
 import { AddressAutofill } from "@mapbox/search-js-react";
+import { GeoAltFill } from "react-bootstrap-icons"; // icona mappa
+import "bootstrap/dist/css/bootstrap.min.css";
 
-const AddressAutofillInput = ({ onSelect, accessToken }) => {
+const AddressAutofillInput = ({ onSelect, accessToken, label = "Indirizzo" }) => {
+    const [isFocused, setIsFocused] = useState(false);
+
     const handleRetrieve = (e) => {
         const result = e.features[0];
         if (!result) return;
@@ -23,18 +28,34 @@ const AddressAutofillInput = ({ onSelect, accessToken }) => {
     };
 
     return (
-        <AddressAutofill
-            accessToken={accessToken}
-            onRetrieve={handleRetrieve}
-            options={{ country: ["it"] }}
-        >
-            <input
-                type="text"
-                placeholder="Inserisci indirizzo..."
-                className="form-control"
-                autoComplete="shipping address-line1"
-            />
-        </AddressAutofill>
+        <div className="mb-3">
+            {label && <label className="form-label fw-semibold">{label}</label>}
+            <AddressAutofill
+                accessToken={accessToken}
+                onRetrieve={handleRetrieve}
+                options={{ country: ["it"] }}
+            >
+                <div
+                    className={`input-group shadow-sm rounded-3 border ${isFocused ? "border-primary" : "border-light"
+                        }`}
+                >
+                    <span className="input-group-text bg-white border-0">
+                        <GeoAltFill className="text-primary" />
+                    </span>
+                    <input
+                        type="text"
+                        placeholder="Cerca indirizzo..."
+                        className="form-control border-0 py-2"
+                        autoComplete="shipping address-line1"
+                        onFocus={() => setIsFocused(true)}
+                        onBlur={() => setIsFocused(false)}
+                    />
+                </div>
+            </AddressAutofill>
+            <small className="text-muted d-block mt-1">
+                Inizia a digitare un indirizzo per ottenere suggerimenti automatici
+            </small>
+        </div>
     );
 };
 
